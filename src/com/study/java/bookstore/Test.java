@@ -7,6 +7,4 @@ public class Test {
         Service svc = new Service();
         svc.instruction();
     }
-
-
 }

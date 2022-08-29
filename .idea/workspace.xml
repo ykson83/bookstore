@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32236339-cbc9-443f-9ac8-3d37b0939b0e" name="Changes" comment="왜 때문에 stackOverflowError?">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Service.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Test.java" afterDir="false" />
+    <list default="true" id="32236339-cbc9-443f-9ac8-3d37b0939b0e" name="Changes" comment="add, delete까지">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +21,11 @@
   </component>
   <component name="Git.Settings">
     <branch-grouping />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -35,13 +39,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\study\2022_Java_Study\bookstore\bookstore\src" />
@@ -141,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
     <MESSAGE value="왜 때문에 stackOverflowError?" />
-    <option name="LAST_COMMIT_MESSAGE" value="왜 때문에 stackOverflowError?" />
+    <MESSAGE value="add, delete까지" />
+    <option name="LAST_COMMIT_MESSAGE" value="add, delete까지" />
   </component>
 </project>

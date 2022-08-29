@@ -23,17 +23,7 @@ public class Book {
         this.location = location;
     }
 
-    public Book() { }
-
-    public List<Book> bookList = new ArrayList<>(
-        Arrays.asList(
-                new Book("해리포터", "판타지", "조앤K롤링", "영국", "1990-01-01", 10000, "1열 1"),
-                new Book("해리포터2", "판타지2", "조앤K롤링2", "영국2", "1990-01-02", 10002, "1열 2"),
-                new Book("해리포터3", "판타지3", "조앤K롤링3", "영국3", "1990-01-03", 10003, "1열 3"),
-                new Book("해리포터4", "판타지4", "조앤K롤링4", "영국4", "1990-01-04", 10004, "1열 4"),
-                new Book("해리포터5", "판타지5", "조앤K롤링5", "영국5", "1990-01-05", 10005, "1열 5")
-        )
-    );
+    // public Book() { }
 
     public String getTitle() {
         return title;
