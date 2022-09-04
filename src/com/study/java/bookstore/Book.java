@@ -1,9 +1,5 @@
 package com.study.java.bookstore;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Book {
     private String title;       // 책 제목
     private String genre;        // 장르
@@ -12,8 +8,9 @@ public class Book {
     private String pubDate;     // 출간일
     private int price;          // 가격
     private String location;    // 위치
+    private int stock;          // 재고
 
-    public Book(String title, String genre, String author, String publisher, String pubDate, int price, String location) {
+    public Book(String title, String genre, String author, String publisher, String pubDate, int price, String location, int stock) {
         this.title = title;
         this.genre = genre;
         this.author = author;
@@ -21,10 +18,12 @@ public class Book {
         this.pubDate = pubDate;
         this.price = price;
         this.location = location;
+        this.stock = stock;
     }
 
     // public Book() { }
 
+    // # getter ----------------------------
     public String getTitle() {
         return title;
     }
@@ -53,6 +52,11 @@ public class Book {
         return location;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    // # setter ----------------------------
     public void setTitle(String title) {
         this.title = title;
     }
@@ -81,6 +85,10 @@ public class Book {
         this.location = location;
     }
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -91,6 +99,7 @@ public class Book {
                 ", pubDate='" + pubDate + '\'' +
                 ", price=" + price +
                 ", location='" + location + '\'' +
+                ", stock='" + stock + '\'' +
                 '}';
     }
 }
