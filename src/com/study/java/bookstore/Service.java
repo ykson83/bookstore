@@ -21,11 +21,13 @@ public class Service {
             )
     );*/
     private List<Book> booklist = new ArrayList<>();
-    private List<Purchase> purchaseList = new ArrayList<>();
+    private List<Purchase> purchaselist = new ArrayList<>();
+    private List<Member> memberlist = new ArrayList<>();
 
     {
         String path_b = "booklist.csv";
         String path_p = "purchaselist.csv";
+        String path_m = "memberlist.csv";
         try {
             booklist = Files.lines(Path.of(path_b)).map( // line -> List<String> -> List<Book>
                     line -> {
@@ -36,11 +38,18 @@ public class Service {
                     }
             ).collect(Collectors.toList());
 
-            purchaseList = Files.lines(Path.of(path_p)).map(
+            purchaselist = Files.lines(Path.of(path_p)).map(
                     line -> {
                         List<String> purStr = Arrays.stream(line.split(",")).map(String::trim).collect(Collectors.toList());
 
                         return new Purchase(purStr.get(0), purStr.get(1), Integer.parseInt(purStr.get(2)), purStr.get(3));
+                    }
+            ).collect(Collectors.toList());
+
+            memberlist = Files.lines(Path.of(path_m)).map(
+                    line -> {
+                        List<String> memberStr = Arrays.stream(line.split(",")).map(String::trim).collect(Collectors.toList());
+                        return new Member(memberStr.get(0), memberStr.get(1), memberStr.get(2), memberStr.get(3));
                     }
             ).collect(Collectors.toList());
 
@@ -64,6 +73,10 @@ public class Service {
             "=            |     5. Buy a book                |                    =\n" +
             "=            |     6. Print purchase list       |                    =\n" +
             "=            |     7. Add book stock            |                    =\n" +
+            "=            |     8. Print Member list         |                    =\n" +
+            "=            |     9. Add new member            |                    =\n" +
+            "=            |    10. Withdraw a member         |                    =\n" +
+            "=            |    11. Modify a member           |                    =\n" +
             "=            |     q. Quit                      |                    =\n" +
             "=            ------------------------------------                    =\n" +
             "======================================================================\n";
@@ -146,6 +159,45 @@ public class Service {
 
                     addBookStock(bookTitle, addStock);
                     break;
+                case "8":
+                    printMemberList();
+                    break;
+                case "9":
+                    System.out.print("Type name: ");
+                    String name = in.nextLine().trim();
+                    System.out.print("Type email: ");
+                    String email = in.nextLine().trim();
+                    System.out.print("Type address: ");
+                    String address = in.nextLine().trim();
+
+                    addMember(name, email, address);
+                    break;
+                case "10":
+                    System.out.print("Type name: ");
+                    String name_except = in.nextLine().trim();
+                    System.out.print("Type email: ");
+                    String email_except = in.nextLine().trim();
+
+                    withdrawMember(name_except, email_except);
+                    break;
+                case "11":
+                    System.out.print("Type email: ");
+                    String email_old = in.nextLine().trim();
+                    Optional<Member> member_old = getMemberByEmail(email_old);
+                    if(member_old.isEmpty()) {
+                        System.out.println("not exist member... ");
+                        break;
+                    }
+
+                    System.out.println(member_old.toString());
+
+                    System.out.print("Type new name: ");
+                    String name_new = in.nextLine().trim();
+                    System.out.print("Type new address: ");
+                    String address_new = in.nextLine().trim();
+
+                    modifyMember(email_old, new Member(name_new, email_old, address_new, null));
+                    break;
                 default:
                     System.out.println("error..unknown number..");
             }
@@ -153,16 +205,7 @@ public class Service {
     }
 
     // # Book -----------------------------------------
-    private List<Book> getBookList() {
-        /*System.out.println(HEAD);
-        System.out.println(LINE);
-
-        bookList.forEach((book) -> {
-            System.out.printf("| %-5s | %-5s | %-5s | %-5s |\n", book.getTitle(), book.getAuthor(), book.getPrice(), book.getLocation());
-            System.out.println(LINE);
-        });*/
-        return booklist;
-    }
+    private List<Book> getBookList() { return booklist; }
 
     public void printBookList() {
         System.out.println(HEAD);
@@ -183,9 +226,7 @@ public class Service {
         return resultList;
     }
 
-    private void addBook(Book book) {
-        booklist.add(book);
-    }
+    private void addBook(Book book) { booklist.add(book); }
 
     private void deleteBook(List<Book> deleteList) {
         deleteList.forEach((delete) -> booklist.remove(delete));
@@ -210,10 +251,13 @@ public class Service {
             });
     }
 
-    // #Purchase --------------------------------
-    public List<Purchase> getPurchaseList() {
-        return purchaseList;
+    public void addBookStock(String bookTitle, int addStock) {
+        getBookList().stream().filter(book -> book.getTitle().equals(bookTitle))
+                .forEach(book -> book.setStock(book.getStock() + addStock));
     }
+
+    // #Purchase --------------------------------
+    public List<Purchase> getPurchaseList() { return purchaselist; }
 
     public void printPurchaseList() {
         List<Purchase> purlist = getPurchaseList();
@@ -221,9 +265,45 @@ public class Service {
         purlist.forEach((purchase) -> System.out.println(purchase.toString()));
     }
 
-    public void addBookStock(String bookTitle, int addStock) {
-        getBookList().stream().filter(book -> book.getTitle().equals(bookTitle))
-                .forEach(book -> book.setStock(book.getStock() + addStock));
+    // #Member --------------------------------
+    public List<Member> getMemberlist() { return memberlist; }
+
+    public List<Member> getActiveMemberList() {
+        return getMemberlist().stream().filter(member -> member.isActive() == true).collect(Collectors.toList());
+    }
+
+    public void printMemberList() {
+        getActiveMemberList().stream().forEach(member -> System.out.println(member.toString()));
+    }
+
+    public void addMember(String name, String email, String address) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = new Date();
+        String today = f.format(d);
+
+        getMemberlist().add(new Member(name, email, address, today));
+    }
+
+    public void withdrawMember(String name, String email) {
+        getActiveMemberList().stream()
+                .filter(member -> member.getEmail().equals(email))
+                .forEach(member -> member.setActive(false));
+    }
+
+    public Optional<Member> getMemberByEmail(String email) {
+        return getActiveMemberList().stream()
+                .filter(m -> m.getEmail().equals(email)).findFirst();
+    }
+
+    public void modifyMember(String email, Member m_t) {
+        // null check는 사전에 함
+        getActiveMemberList().stream()
+                .filter(member -> member.getEmail().equals(m_t.getEmail()))
+                .forEach(member -> {
+                    System.out.println(member.toString());
+                    member.setName(m_t.getName());
+                    member.setAddress(m_t.getAddress());
+                });
     }
 
     // util -------------------------------------
