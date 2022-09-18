@@ -1,12 +1,17 @@
 package com.study.java.bookstore;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Service {
 
-    private List<Book> bookData = new ArrayList<>(
+    /*private List<Book> booklist = new ArrayList<>(
             Arrays.asList(
                     new Book("해리포터", "판타지", "조앤K롤링", "영국", "1990-01-01", 10000, "1열 1", 1),
                     new Book("해리포터2", "판타지", "조앤K롤링", "영국", "1990-01-02", 12000, "1열 2", 2),
@@ -14,9 +19,35 @@ public class Service {
                     new Book("토비의 스프링", "개발", "토비", "토비사", "1990-01-04", 35000, "1열 4", 4),
                     new Book("자바의 정석", "개발", "남궁성", "궁성사", "1990-01-05", 30000, "1열 5", 5)
             )
-    );
-
+    );*/
+    private List<Book> booklist = new ArrayList<>();
     private List<Purchase> purchaseList = new ArrayList<>();
+
+    {
+        String path_b = "booklist.csv";
+        String path_p = "purchaselist.csv";
+        try {
+            booklist = Files.lines(Path.of(path_b)).map( // line -> List<String> -> List<Book>
+                    line -> {
+                        List<String> bookStr = Arrays.stream(line.split(",")).map(String::trim).collect(Collectors.toList());
+
+                        return new Book(bookStr.get(0), bookStr.get(1), bookStr.get(2), bookStr.get(3), bookStr.get(4),
+                                Integer.parseInt(bookStr.get(5)), bookStr.get(6), Integer.parseInt(bookStr.get(7)));
+                    }
+            ).collect(Collectors.toList());
+
+            purchaseList = Files.lines(Path.of(path_p)).map(
+                    line -> {
+                        List<String> purStr = Arrays.stream(line.split(",")).map(String::trim).collect(Collectors.toList());
+
+                        return new Purchase(purStr.get(0), purStr.get(1), Integer.parseInt(purStr.get(2)), purStr.get(3));
+                    }
+            ).collect(Collectors.toList());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     static String HEAD = String.format("| %-5s | %-5s | %-5s | %-5s | %-5s |", "TITLE", "WRITER", "PRICE", "LOCATION", "STOCK");
     static String LINE = "-----------------------------------------------------------";
@@ -30,8 +61,9 @@ public class Service {
             "=            |     2. Book Search               |                    =\n" +
             "=            |     3. Add new book              |                    =\n" +
             "=            |     4. Delete a book             |                    =\n" +
-            "=            |     5. buy a book                |                    =\n" +
+            "=            |     5. Buy a book                |                    =\n" +
             "=            |     6. Print purchase list       |                    =\n" +
+            "=            |     7. Add book stock            |                    =\n" +
             "=            |     q. Quit                      |                    =\n" +
             "=            ------------------------------------                    =\n" +
             "======================================================================\n";
@@ -106,6 +138,14 @@ public class Service {
                 case "6":
                     printPurchaseList();
                     break;
+                case "7":
+                    System.out.print("Type title: ");
+                    String bookTitle = in.nextLine();
+                    System.out.print("Type add stock: ");
+                    int addStock = Integer.parseInt(in.nextLine().trim());
+
+                    addBookStock(bookTitle, addStock);
+                    break;
                 default:
                     System.out.println("error..unknown number..");
             }
@@ -121,7 +161,7 @@ public class Service {
             System.out.printf("| %-5s | %-5s | %-5s | %-5s |\n", book.getTitle(), book.getAuthor(), book.getPrice(), book.getLocation());
             System.out.println(LINE);
         });*/
-        return bookData;
+        return booklist;
     }
 
     public void printBookList() {
@@ -136,7 +176,7 @@ public class Service {
     }
 
     private List<Book> getBooksByTitle(String title) {
-        List<Book> resultList = bookData.stream()
+        List<Book> resultList = booklist.stream()
                 .filter((book) -> book.getTitle().contains(title))
                 .collect(Collectors.toList());
 
@@ -144,11 +184,11 @@ public class Service {
     }
 
     private void addBook(Book book) {
-        bookData.add(book);
+        booklist.add(book);
     }
 
     private void deleteBook(List<Book> deleteList) {
-        deleteList.forEach((delete) -> bookData.remove(delete));
+        deleteList.forEach((delete) -> booklist.remove(delete));
     }
 
     public void buyBook(String title, int quantity, String customer) {
@@ -159,7 +199,7 @@ public class Service {
             return;
         }
 
-        bookData.stream()
+        booklist.stream()
             .filter(book -> book.getTitle().equals(title))
             .filter(book -> book.getStock() > quantity)
             .forEach(book -> {
@@ -179,6 +219,11 @@ public class Service {
         List<Purchase> purlist = getPurchaseList();
         if(purlist.size() == 0) System.out.println("구매 내역이 없습니다");
         purlist.forEach((purchase) -> System.out.println(purchase.toString()));
+    }
+
+    public void addBookStock(String bookTitle, int addStock) {
+        getBookList().stream().filter(book -> book.getTitle().equals(bookTitle))
+                .forEach(book -> book.setStock(book.getStock() + addStock));
     }
 
     // util -------------------------------------

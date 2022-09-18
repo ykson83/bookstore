@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32236339-cbc9-443f-9ac8-3d37b0939b0e" name="Changes" comment="add, delete까지">
+    <list default="true" id="32236339-cbc9-443f-9ac8-3d37b0939b0e" name="Changes" comment=".csv 파일, addStock">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/booklist_backup.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/purchaselist.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booklist.csv" beforeDir="false" afterPath="$PROJECT_DIR$/booklist.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/study/java/bookstore/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/study/java/bookstore/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,11 +46,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
+    "last_opened_file_path": "D:/study/2022_Java_Study/JavaStudy",
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\study\2022_Java_Study\bookstore\bookstore" />
       <recent name="D:\study\2022_Java_Study\bookstore\bookstore\src" />
     </key>
   </component>
@@ -76,6 +80,12 @@
       <updated>1661430838029</updated>
       <workItem from="1661430839625" duration="5293000" />
       <workItem from="1661588436612" duration="8325000" />
+      <workItem from="1661746719691" duration="42000" />
+      <workItem from="1661746791086" duration="7262000" />
+      <workItem from="1662275548950" duration="16994000" />
+      <workItem from="1662796530948" duration="7474000" />
+      <workItem from="1662967458099" duration="170000" />
+      <workItem from="1662967652437" duration="7083000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1661432647633</created>
@@ -84,7 +94,21 @@
       <option name="project" value="LOCAL" />
       <updated>1661432647633</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add, delete까지">
+      <created>1661735651554</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1661735651554</updated>
+    </task>
+    <task id="LOCAL-00003" summary="리팩토링, 구매내역 리스트까지">
+      <created>1662310348665</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1662310348665</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +171,12 @@
     <MESSAGE value="test" />
     <MESSAGE value="왜 때문에 stackOverflowError?" />
     <MESSAGE value="add, delete까지" />
-    <option name="LAST_COMMIT_MESSAGE" value="add, delete까지" />
+    <MESSAGE value="리팩토링, 구매내역 리스트까지" />
+    <MESSAGE value=".csv 파일, addStock" />
+    <option name="LAST_COMMIT_MESSAGE" value=".csv 파일, addStock" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
